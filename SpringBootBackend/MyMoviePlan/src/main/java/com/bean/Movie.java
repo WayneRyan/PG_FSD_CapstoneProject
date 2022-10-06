@@ -2,14 +2,12 @@ package com.bean;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
-public class Movies {
+public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,4 +17,6 @@ public class Movies {
     private String genre;
     private int duration;
     private String rating;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<ShowTime> show_times;
 }

@@ -7,16 +7,14 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Purchases {
+public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    private int id;
     @ManyToOne
-    private Show_times show_time;
-
+    private ShowTime show_time;
     private double price;
     private Date finalized;
-
     @ManyToOne
-    private Accounts account;
+    private Account account;
 }
