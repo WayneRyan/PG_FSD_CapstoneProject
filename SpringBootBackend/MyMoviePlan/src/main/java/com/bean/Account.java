@@ -15,6 +15,7 @@ public class Account {
     private String full_name;
     private String user_name;
     private String password;
+    private boolean is_admin;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Purchase> purchases;

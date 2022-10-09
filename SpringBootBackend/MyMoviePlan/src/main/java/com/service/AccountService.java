@@ -5,9 +5,11 @@ import com.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class AccountService {
 
     @Autowired
@@ -20,9 +22,15 @@ public class AccountService {
     }
 
     public List<Account> getAllAccounts() {
-        List<Account> junk = accountRepository.findAll();
-        System.out.println("junk");
         return accountRepository.findAll();
+    }
+
+    public String checkCredentials(Account account) {
+        // If there exists an account in the database with the same username and password
+        // Set session data and
+        return "You successfully logged in";
+        // Otherwise clear session data and
+        // return "Failure to login";
     }
 
     // Need to check user name and password

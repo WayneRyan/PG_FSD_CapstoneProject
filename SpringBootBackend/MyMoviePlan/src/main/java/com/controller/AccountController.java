@@ -19,4 +19,10 @@ public class AccountController {
 
     @GetMapping(value = "get-all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Account> getAllAccounts() { return accountService.getAllAccounts();}
+
+    @PostMapping(value = "login", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String loginToAccount(@RequestBody Account account) {
+        return accountService.checkCredentials(account);
+    }
+
 }
