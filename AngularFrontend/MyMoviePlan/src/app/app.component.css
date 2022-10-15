@@ -1,0 +1,7 @@
+#the_body {
+  background-image: url('../assets/images/mainBackground.jpg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  min-height: 400px;
+  padding: 20px;
+}
