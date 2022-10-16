@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("show-time")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ShowTimeController {
     @Autowired
     ShowTimeService showTimeService;

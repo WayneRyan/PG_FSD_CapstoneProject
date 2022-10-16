@@ -13,7 +13,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String full_name;
-    private String user_name;
+    private String username;
     private String password;
     private boolean is_admin;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)

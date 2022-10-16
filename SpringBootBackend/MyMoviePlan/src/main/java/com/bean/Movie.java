@@ -18,6 +18,7 @@ public class Movie {
     private String genre;
     private int duration;
     private String rating;
+    private String image;
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ShowTime> show_times;

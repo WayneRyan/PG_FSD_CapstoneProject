@@ -9,11 +9,13 @@ import {AuthenticateService} from "../services/authenticate.service";
 export class NavbarComponent implements OnInit {
 
   isLoggedIn:boolean = false;
+  userInfo:any = '';
 
-  constructor(private loginService:AuthenticateService) { }
+  constructor(public loginService:AuthenticateService) { }
 
   ngOnInit(): void {
     this.loginService.isCurrentlyLoggedIn.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+    this.loginService.currentUserInfo.subscribe(userInfo => this.userInfo = userInfo);
   }
 
 }

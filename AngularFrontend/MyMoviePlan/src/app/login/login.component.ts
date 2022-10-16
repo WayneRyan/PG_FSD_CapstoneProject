@@ -9,17 +9,22 @@ import {AuthenticateService} from "../services/authenticate.service";
 })
 export class LoginComponent implements OnInit {
 
+  errorMessage = "";
+
   constructor(private router: Router, private loginService:AuthenticateService) { }
 
   ngOnInit(): void {
+    this.loginService.isCurrentlyLoggedIn.subscribe(isLoggedIn =>{
+      if (isLoggedIn){
+        this.router.navigate(['/search']).then(()=>{});
+      }
+    });
+    this.loginService.currentErrorMessage.subscribe(errorMessage =>{
+      this.errorMessage = errorMessage;
+    });
   }
 
   submit(f: any) {
-    console.log(f.value['password']);
-    if (this.loginService.authenticate(f.value['login'], f.value['password'])){
-      this.router.navigate(['/search']).then(()=>{});
-    } else {
-      this.router.navigate(['/home']).then(()=>{});
-    }
+    this.loginService.authenticate(f.value['login'], f.value['password']);
   }
 }

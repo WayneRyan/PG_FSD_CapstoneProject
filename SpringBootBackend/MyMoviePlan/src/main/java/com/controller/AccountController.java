@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("account")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
     @Autowired
     AccountService accountService;
@@ -21,8 +22,12 @@ public class AccountController {
     public List<Account> getAllAccounts() { return accountService.getAllAccounts();}
 
     @PostMapping(value = "login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String loginToAccount(@RequestBody Account account) {
-        return accountService.checkCredentials(account);
+    public Account loginToAccount(@RequestBody Account account) {
+        if (accountService.checkCredentials(account)){
+            return accountService.getByUsername(account.getUsername());
+        } else {
+            return new Account();
+        }
     }
 
 }

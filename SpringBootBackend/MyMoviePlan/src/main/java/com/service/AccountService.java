@@ -17,20 +17,24 @@ public class AccountService {
 
     public String createAccount(Account account) {
         // Need to test issues with account already exists.
-        accountRepository.save(account);
-        return "Account created successfully";
+        try {
+            accountRepository.save(account);
+            return "Account created successfully";
+        }catch (Exception e) {
+            return "There was an issue creating the account";
+        }
     }
 
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
 
-    public String checkCredentials(Account account) {
-        // If there exists an account in the database with the same username and password
-        // Set session data and
-        return "You successfully logged in";
-        // Otherwise clear session data and
-        // return "Failure to login";
+    public boolean checkCredentials(Account account) {
+        return accountRepository.existsByPasswordAndUsername(account.getPassword(), account.getUsername());
+    }
+
+    public Account getByUsername(String username){
+        return accountRepository.findAccountByUsername(username);
     }
 
     // Need to check user name and password

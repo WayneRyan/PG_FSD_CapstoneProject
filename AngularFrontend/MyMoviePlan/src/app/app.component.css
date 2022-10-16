@@ -1,7 +1,8 @@
-#the_body {
-  background-image: url('../assets/images/mainBackground.jpg');
-  background-repeat: no-repeat;
-  background-size: auto;
+.body_div {
+  background-color: #92badd;
+}
+
+.content_area {
+  margin: 20px;
   min-height: 400px;
-  padding: 20px;
 }

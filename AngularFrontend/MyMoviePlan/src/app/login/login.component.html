@@ -2,6 +2,7 @@
   <div id="formContent">
     <p></p>
     <form #f="ngForm" (ngSubmit)="submit(f)">
+      <div *ngIf="errorMessage !== ''" >{{errorMessage}}</div>
       <input type="text" id="login" class="fadeIn second" ngModel name="login" #login="ngModel" placeholder="login">
       <input type="text" id="password" class="fadeIn third" ngModel name="password" #password="ngModel" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In" >
