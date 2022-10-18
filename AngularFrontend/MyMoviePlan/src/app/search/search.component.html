@@ -1,29 +1,48 @@
 <form>
-  <input type="text" placeholder="Search..">
+  <input type="text" placeholder="Search.." style="margin-bottom: 10px">
 </form>
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
   <ol class="carousel-indicators">
-    <li *ngFor="let movie of movies" data-target="#myCarousel" [attr.data-slide-to]="movie['id'] - 1" [class]="movie['id'] === 1 ? 'active' : ''"></li>
+    <li *ngFor="let movie of movies" data-target="#myCarousel" [attr.data-slide-to]="movie['id'] - 1"
+        [class]="movie['id'] === 1 ? 'active' : ''"></li>
   </ol>
   <div class="carousel-inner">
     <div *ngFor="let movie of movies" [class]="movie['id'] === 1 ? 'item active' : 'item'">
-      <img class="d-block w-100" [src]="'../../assets/images/' + movie['image']" style="height:400px; float: left; margin: 10px;" [alt]="movie['name']">
-      <div style="margin: 10px;">
-        <dl>
-          <dt>Movie Name: </dt><dd>{{movie['name']}}</dd>
-          <dt>Movie Description: </dt><dd>{{movie['description']}}</dd>
-          <dt>Movie Language: </dt><dd>{{movie['language']}}</dd>
-          <dt>Movie Genre: </dt><dd>{{movie['genre']}}</dd>
-          <dt>Movie Duration: </dt><dd>{{movie['duration']}} minutes</dd>
-          <dt>Movie Rating: </dt><dd>{{movie['rating']}}</dd>
-        </dl>
-        <button type="button"
-                class="btn btn-default btn-sm">
-                <span class="glyphicon
-                    glyphicon-shopping-cart">
-                </span>
-          <b> Add to Cart </b>
-        </button>
+      <div class="row">
+        <div class="col-sm-4">
+          <img class="d-block w-100"
+               [src]="'../../assets/images/' + movie['image']"
+               style="width:100%;"
+               [alt]="movie['name']">
+        </div>
+        <div class="col-sm-8">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Showtimes
+                <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">HTML</a></li>
+                <li><a href="#">CSS</a></li>
+                <li><a href="#">JavaScript</a></li>
+              </ul>
+            </div>
+            <h2>{{movie['name']}}</h2>
+            <dl>
+              <dt>Description:</dt>
+              <dd>{{movie['description']}}</dd>
+              <dt>Language:</dt>
+              <dd>{{movie['language']}}</dd>
+              <dt>Genre:</dt>
+              <dd>{{movie['genre']}}</dd>
+              <dt>Duration:</dt>
+              <dd>{{movie['duration']}} minutes</dd>
+              <dt>Rating:</dt>
+              <dd>{{movie['rating']}}</dd>
+            </dl>
+            <button type="button" class="btn btn-success btn-sm" (click)="addToCart(movie['id'])">
+              <span class="glyphicon glyphicon-shopping-cart"></span>
+              <b> Add to Cart </b>
+            </button>
+        </div>
       </div>
     </div>
   </div>

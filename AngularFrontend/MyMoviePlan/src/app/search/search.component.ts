@@ -21,4 +21,7 @@ export class SearchComponent implements OnInit {
     this.moviesService.getAll();
   }
 
+  addToCart(id:number) {
+
+  }
 }

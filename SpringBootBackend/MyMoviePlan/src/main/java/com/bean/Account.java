@@ -12,10 +12,10 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String full_name;
+    private String fullname;
     private String username;
     private String password;
-    private boolean is_admin;
+    private boolean isadmin;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Purchase> purchases;

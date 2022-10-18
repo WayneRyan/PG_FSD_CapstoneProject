@@ -21,5 +21,5 @@ public class Movie {
     private String image;
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<ShowTime> show_times;
+    private List<Showtime> show_times;
 }

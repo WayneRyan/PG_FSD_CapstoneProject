@@ -12,7 +12,7 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    private ShowTime show_time;
+    private Showtime showtime;
     private double price;
     private Date finalized;
     @ManyToOne
