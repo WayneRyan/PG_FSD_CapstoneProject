@@ -1,6 +1,8 @@
 package com.service;
 
+import com.bean.Movie;
 import com.bean.Showtime;
+import com.dto.MovieShowTimes;
 import com.repository.ShowTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +23,17 @@ public class ShowTimeService {
         return "ShowTime created successfully";
     }
 
-    public HashMap<Integer, List<Showtime>> getAllShowTimes() {
-        HashMap<Integer, List<Showtime>> retVal = new HashMap<>();
+    public MovieShowTimes getAllShowTimes() {
+        MovieShowTimes retVal = new MovieShowTimes();
+        HashMap<Integer, List<Showtime>> showTimesByMovieID = retVal.getShowTimesByMovieID();
+        List<Movie> allMovies = retVal.getAllMovies();
         for (Showtime showtime : showTimeRepository.findAll()) {
             Integer movie_id = showtime.getMovie().getId();
-            if (! retVal.containsKey(movie_id)){
-                retVal.put(movie_id,new ArrayList<Showtime>());
+            if (! showTimesByMovieID.containsKey(movie_id)){
+                showTimesByMovieID.put(movie_id,new ArrayList<Showtime>());
+                allMovies.add(showtime.getMovie());
             }
-            retVal.get(movie_id).add(showtime);
+            showTimesByMovieID.get(movie_id).add(showtime);
         }
         return retVal;
     }

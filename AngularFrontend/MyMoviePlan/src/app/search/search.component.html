@@ -3,11 +3,11 @@
 </form>
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
   <ol class="carousel-indicators">
-    <li *ngFor="let movie of movies" data-target="#myCarousel" [attr.data-slide-to]="movie['id'] - 1"
+    <li *ngFor="let movie of movieShowTimes.allMovies" data-target="#myCarousel" [attr.data-slide-to]="movie['id'] - 1"
         [class]="movie['id'] === 1 ? 'active' : ''"></li>
   </ol>
   <div class="carousel-inner">
-    <div *ngFor="let movie of movies" [class]="movie['id'] === 1 ? 'item active' : 'item'">
+    <div *ngFor="let movie of movieShowTimes.allMovies" [class]="movie['id'] === 1 ? 'item active' : 'item'">
       <div class="row">
         <div class="col-sm-4">
           <img class="d-block w-100"
@@ -20,9 +20,7 @@
               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Showtimes
                 <span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li><a href="#">HTML</a></li>
-                <li><a href="#">CSS</a></li>
-                <li><a href="#">JavaScript</a></li>
+                <li *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)"><a href="#">{{showTime.starttime}}</a></li>
               </ul>
             </div>
             <h2>{{movie['name']}}</h2>

@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.bean.Showtime;
+import com.dto.MovieShowTimes;
 import com.service.ShowTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,7 +21,7 @@ public class ShowTimeController {
     public String createShowTime(@RequestBody Showtime showTime) {return showTimeService.createShowTime(showTime);}
 
     @GetMapping(value = "get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public HashMap<Integer,List<Showtime>> getAllShowTimes() {
+    public MovieShowTimes getAllShowTimes() {
         return showTimeService.getAllShowTimes();
     }
 }

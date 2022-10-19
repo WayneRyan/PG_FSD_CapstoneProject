@@ -1,6 +1,5 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <p></p>
     <form #f="ngForm" (ngSubmit)="submit(f)">
       <div *ngIf="errorMessage !== ''" >{{errorMessage}}</div>
       <input type="text" id="login" class="fadeIn second" ngModel name="login" #login="ngModel" placeholder="login">

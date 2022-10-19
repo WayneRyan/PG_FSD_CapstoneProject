@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {MoviesService} from "../services/movies.service";
+import {Component, OnInit} from '@angular/core';
+import {ShowTimeService} from "../services/show-time.service";
+import {MovieShowTimes} from "../beans/MovieShowTimes";
+import {ShowTime} from "../beans/ShowTime";
 
 @Component({
   selector: 'app-search',
@@ -8,20 +10,20 @@ import {MoviesService} from "../services/movies.service";
 })
 export class SearchComponent implements OnInit {
 
-  movies:any[] = [];
+  movieShowTimes: MovieShowTimes = {allMovies: [], showTimesByMovieID: new Map<number, ShowTime[]>()};
 
-  constructor(private moviesService:MoviesService) {
+  constructor(private showTimeService: ShowTimeService) {
 
   }
 
   ngOnInit(): void {
-    this.moviesService.currentMovies.subscribe( movies => {
-      this.movies = movies;
-    })
-    this.moviesService.getAll();
+    this.showTimeService.currentMovieShowTimes.subscribe((movieShowTimes: MovieShowTimes) => {
+      this.movieShowTimes = movieShowTimes;
+    });
+    this.showTimeService.getAll();
   }
 
-  addToCart(id:number) {
+  addToCart(id: number) {
 
   }
 }
