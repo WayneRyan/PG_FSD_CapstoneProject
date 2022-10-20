@@ -9,7 +9,7 @@ import {Movie} from "../beans/Movie";
   providedIn: 'root'
 })
 export class ShowTimeService {
-  private movieShowTimes: BehaviorSubject<MovieShowTimes> = new BehaviorSubject<MovieShowTimes>({
+  private movieShowTimes = new BehaviorSubject<MovieShowTimes>({
     allMovies: [],
     showTimesByMovieID: new Map<number, ShowTime[]>()
   });

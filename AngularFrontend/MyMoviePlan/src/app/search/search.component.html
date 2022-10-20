@@ -16,30 +16,31 @@
                [alt]="movie['name']">
         </div>
         <div class="col-sm-8">
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Showtimes
-                <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)"><a href="#">{{showTime.starttime}}</a></li>
-              </ul>
-            </div>
-            <h2>{{movie['name']}}</h2>
-            <dl>
-              <dt>Description:</dt>
-              <dd>{{movie['description']}}</dd>
-              <dt>Language:</dt>
-              <dd>{{movie['language']}}</dd>
-              <dt>Genre:</dt>
-              <dd>{{movie['genre']}}</dd>
-              <dt>Duration:</dt>
-              <dd>{{movie['duration']}} minutes</dd>
-              <dt>Rating:</dt>
-              <dd>{{movie['rating']}}</dd>
-            </dl>
-            <button type="button" class="btn btn-success btn-sm" (click)="addToCart(movie['id'])">
+          <h2>{{movie['name']}}</h2>
+          <dl>
+            <dt>Description:</dt>
+            <dd>{{movie['description']}}</dd>
+            <dt>Language:</dt>
+            <dd>{{movie['language']}}</dd>
+            <dt>Genre:</dt>
+            <dd>{{movie['genre']}}</dd>
+            <dt>Duration:</dt>
+            <dd>{{movie['duration']}} minutes</dd>
+            <dt>Rating:</dt>
+            <dd>{{movie['rating']}}</dd>
+          </dl>
+          <div style="margin-bottom: 60px;">
+            <label style="margin-right: 10px;">Select Showtime: </label>
+            <select style="margin-right: 10px;" id="showTime" class="btn btn-primary" #showTime>
+              <option *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)" class="btn-default text-left" [value]="showTime.id">
+                {{showTime.starttime |  date:'short'}}
+              </option>
+            </select>
+            <button type="button" class="btn btn-success btn-sm" (click)="addToCart(movie['id'], showTime.value)">
               <span class="glyphicon glyphicon-shopping-cart"></span>
               <b> Add to Cart </b>
             </button>
+          </div>
         </div>
       </div>
     </div>

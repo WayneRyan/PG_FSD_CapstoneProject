@@ -1,6 +1,6 @@
 export interface ShowTime {
   id: number,
-  starttime: string,
+  starttime: Date,
   price: number,
   theatre: number,
   available: number,
