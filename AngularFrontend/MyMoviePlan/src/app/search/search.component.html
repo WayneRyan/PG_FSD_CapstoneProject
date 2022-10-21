@@ -1,5 +1,5 @@
 <form>
-  <input type="text" placeholder="Search.." style="margin-bottom: 10px">
+  <input type="text" placeholder="Search..." style="margin-bottom: 10px;"> <i class="fa-solid fa-magnifying-glass" style="position: relative; left: -25px;"></i>
 </form>
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
   <ol class="carousel-indicators">
@@ -36,8 +36,8 @@
                 {{showTime.starttime |  date:'short'}}
               </option>
             </select>
-            <button type="button" class="btn btn-success btn-sm" (click)="addToCart(movie['id'], showTime.value)">
-              <span class="glyphicon glyphicon-shopping-cart"></span>
+            <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-success btn-sm" (click)="addToCart(movie['id'], showTime.value)">
+              <i class="fa-solid fa-cart-plus"></i>
               <b> Add to Cart </b>
             </button>
           </div>
@@ -53,4 +53,15 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
+</div>
+<div class="modal fade text-light bg-dark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background: lightcyan;">
+      <div class="modal-footer" style="border: none;">
+        <a type="button" class="btn btn-success pull-left" data-dismiss="modal" routerLink="/cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+          <h4 class="pull-left text-center" style="width:-webkit-fill-available;">The movie has been added to your cart.</h4>
+        <a type="button" class="btn btn-success pull-right" data-dismiss="modal"><i class="fa-sharp fa-solid fa-store"></i> Shop</a>
+      </div>
+    </div>
+  </div>
 </div>

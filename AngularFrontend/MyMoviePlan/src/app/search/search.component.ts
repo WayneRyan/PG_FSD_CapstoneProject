@@ -18,6 +18,9 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.showTimeService.currentMovieShowTimes.subscribe((movieShowTimes: MovieShowTimes) => {
       this.movieShowTimes = movieShowTimes;
+      console.log('hello');
+      console.log(movieShowTimes);
+      console.log('bye');
     });
     this.showTimeService.getAll();
   }

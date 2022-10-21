@@ -1,1 +1,19 @@
+<h3 class="page-header">Shopping Cart</h3>
+<ul class="list-group">
+  <li *ngFor="let key of myCart.keys()" class="list-group-item">
+    <div class="float-left">
+      <button class="btn btn-xs"><i class="fa-sharp fa-solid fa-plus"></i></button>
+      <span class="badge">Qty: {{ getQuantity(key)}}</span>
+      <button class="btn btn-xs"><i class="fa-sharp fa-solid fa-minus"></i></button>
+    </div>
+    {{ getMovie(key)?.name}}
+    <label style="margin-right: 10px;">Showtime: </label>
+    <select style="margin-right: 10px;" id="showTime" class="btn btn-primary" #showTime>
+      <option *ngFor="let showTime of getAvailableShowTimes(key)" class="btn-default text-left" [value]="showTime.id" [selected]="showTime?.id === getShowTime(key)?.id" >
+        {{showTime.starttime |  date:'short'}}
+      </option>
+    </select>
+  </li>
+</ul>
 <a routerLink="/checkout" type="button" class="btn btn-success">Checkout</a>
+<a routerLink="/checkout" type="button" class="btn btn-success pull-right">Continue Shopping</a>
