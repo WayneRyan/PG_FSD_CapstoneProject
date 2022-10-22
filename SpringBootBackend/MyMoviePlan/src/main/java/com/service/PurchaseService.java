@@ -14,12 +14,18 @@ public class PurchaseService {
     @Autowired
     PurchaseRepository purchaseRepository;
 
-    public String createPurchase(Purchase purchase){
-        purchaseRepository.save(purchase);
+    public String createPurchase(List<Purchase> purchases){
+        for (Purchase p : purchases) {
+            purchaseRepository.save(p);
+        }
         return "Purchase created successfully";
     }
 
     public List<Purchase> getAllPurchases() {
         return purchaseRepository.findAll();
+    }
+
+    public List<Purchase> getUserPurchases(int id) {
+        return purchaseRepository.findAllByAccount_Id(id);
     }
 }

@@ -14,6 +14,7 @@ public class Account {
     private int id;
     private String fullname;
     private String username;
+    @JsonIgnore
     private String password;
     private boolean isadmin;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)

@@ -8,6 +8,7 @@ public class MyMoviePlanApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MyMoviePlanApplication.class, args);
+        System.out.println("Server is running.");
     }
 
 }

@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 import {MovieShowTimes} from "../beans/MovieShowTimes";
 import {ShowTime} from "../beans/ShowTime";
-import {Movie} from "../beans/Movie";
+import {Account} from "../beans/Account";
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +15,15 @@ export class ShowTimeService {
   });
   currentMovieShowTimes = this.movieShowTimes.asObservable();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+  }
 
   getAll() {
     this.httpClient.get<MovieShowTimes>('http://localhost:8181/show-time/get-all').subscribe({
       next: response => {
-        let retval:MovieShowTimes = new MovieShowTimes();
-        for (const [key, value] of Object.entries(response.showTimesByMovieID)){
-          retval.showTimesByMovieID.set(Number(key),value);
+        let retval: MovieShowTimes = new MovieShowTimes();
+        for (const [key, value] of Object.entries(response.showTimesByMovieID)) {
+          retval.showTimesByMovieID.set(Number(key), value);
         }
         retval.allMovies = response.allMovies;
         this.movieShowTimes.next(retval);
@@ -30,4 +31,16 @@ export class ShowTimeService {
       error: (error: Error) => console.log(error.message)
     });
   }
+
+  getTicket(ticket:{showTimeID: number, quantity: number }):{ showtime: ShowTime, account: Account, quantity: number }{
+    this.movieShowTimes.value.
+    let showTimeId = this.myCart?.get(key)?.showTimeID ?? 0;
+    let movieId = this.myCart?.get(key)?.movieID ?? 0;
+    // @ts-ignore
+    for (let showTime of this.myShowTimes.showTimesByMovieID.get(movieId)){
+      if (showTime.id === showTimeId) return showTime;
+    }
+    return undefined;
+  }
+
 }
