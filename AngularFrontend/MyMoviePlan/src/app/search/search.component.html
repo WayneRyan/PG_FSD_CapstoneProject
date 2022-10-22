@@ -29,11 +29,11 @@
             <dt>Rating:</dt>
             <dd>{{movie['rating']}}</dd>
           </dl>
-          <div style="margin-bottom: 60px;">
-            <label style="margin-right: 10px;">Select Showtime: </label>
-            <select style="margin-right: 10px;" id="showTime" class="btn btn-primary" #showTime>
+          <label>Select: </label>
+          <div class="container-fluid" style="margin: 0px 60px 60px 0px">
+            <select id="showTime" class="btn btn-primary" #showTime>
               <option *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)" class="btn-default text-left" [value]="showTime.id">
-                {{showTime.starttime |  date:'short'}}
+                Showtime:<b>{{showTime.starttime |  date:'short'}}</b> | Price:<b>{{showTime.price | currency}}</b>
               </option>
             </select>
             <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-success btn-sm" (click)="addToCart(movie['id'], showTime.value)">

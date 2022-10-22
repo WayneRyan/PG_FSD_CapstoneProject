@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   myCart = new Map<string,{movieID:number,showTimeID:number, quantity:number}>();
   myShowTimes = new MovieShowTimes();
 
-  constructor(private cartService:CartService, private showTimeService:ShowTimeService) {}
+  constructor(public cartService:CartService, private showTimeService:ShowTimeService) {}
 
   ngOnInit(): void {
     this.cartService.currentCart.subscribe(myCart => this.myCart = myCart);
@@ -40,12 +40,19 @@ export class CartComponent implements OnInit {
     return undefined;
   }
 
-  getAvailableShowTimes(key:string): ShowTime[] | undefined{
-    let movieId = this.myCart?.get(key)?.movieID ?? 0;
-    return this.myShowTimes.showTimesByMovieID.get(movieId);
-  }
-
   getQuantity(key:string): number {
     return this.myCart?.get(key)?.quantity ?? 0;
+  }
+
+  getSubTotal(key:string): number {
+    return ((this.getQuantity(key) ?? 0) * (this.getShowTime(key)?.price ?? 0));
+  }
+
+  getTotalPrice(): number {
+    let retVal = 0;
+    for (let key of this.myCart.keys()){
+      retVal += this.getSubTotal(key);
+    }
+    return retVal;
   }
 }

@@ -1,19 +1,33 @@
-<h3 class="page-header">Shopping Cart</h3>
-<ul class="list-group">
-  <li *ngFor="let key of myCart.keys()" class="list-group-item">
-    <div class="float-left">
-      <button class="btn btn-xs"><i class="fa-sharp fa-solid fa-plus"></i></button>
+<a routerLink="/search" type="button" class="btn btn-success">
+  <i class="fa-sharp fa-solid fa-store"></i> Continue Shopping
+</a>
+<ul class="list-group" style="margin-top: 10px;">
+  <li *ngFor="let key of myCart.keys()" class="list-group-item" style="background: lightcyan;">
+    <div>
+      <button class="btn btn-xs" (click)="cartService.plusOne(key)">
+        <i class="fa-sharp fa-solid fa-plus"></i>
+      </button>
       <span class="badge">Qty: {{ getQuantity(key)}}</span>
-      <button class="btn btn-xs"><i class="fa-sharp fa-solid fa-minus"></i></button>
+      <button class="btn btn-xs" (click)="cartService.minusOne(key)">
+        <i class="fa-sharp fa-solid fa-minus"></i>
+      </button>
     </div>
-    {{ getMovie(key)?.name}}
-    <label style="margin-right: 10px;">Showtime: </label>
-    <select style="margin-right: 10px;" id="showTime" class="btn btn-primary" #showTime>
-      <option *ngFor="let showTime of getAvailableShowTimes(key)" class="btn-default text-left" [value]="showTime.id" [selected]="showTime?.id === getShowTime(key)?.id" >
-        {{showTime.starttime |  date:'short'}}
-      </option>
-    </select>
+    <div>
+      <label style="margin-right: 10px; float: left;">Movie: </label>
+      <h4>{{ getMovie(key)?.name}}</h4>
+    </div>
+    <div>
+      <label style="margin-right: 10px; float: left;">Showtime: </label>
+      <h4>{{getShowTime(key)?.starttime ?? 0 | date:'short'}}</h4>
+    </div>
+    <div>
+      <label style="margin-right: 10px; float: left;">Ticket Price: </label>
+      <h4>{{getQuantity(key)}} x {{getShowTime(key)?.price ?? 0 | currency}}
+        = {{getSubTotal(key) | currency}}</h4>
+    </div>
   </li>
 </ul>
-<a routerLink="/checkout" type="button" class="btn btn-success">Checkout</a>
-<a routerLink="/checkout" type="button" class="btn btn-success pull-right">Continue Shopping</a>
+<label class="pull-left">Grand Total: </label><h4>{{getTotalPrice() | currency}}</h4>
+<a routerLink="/checkout" type="button" class="btn btn-success pull-left">
+  <i class="fa-solid fa-credit-card"></i> Checkout
+</a>
