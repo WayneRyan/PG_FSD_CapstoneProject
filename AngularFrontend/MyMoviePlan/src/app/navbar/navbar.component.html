@@ -12,11 +12,14 @@
       <li *ngIf="isLoggedIn" routerLinkActive="active current">
         <a routerLink="/cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
       </li>
+      <li *ngIf="isLoggedIn" routerLinkActive="active current">
+        <a routerLink="/summary"><i class="fa-solid fa-ticket"></i> Purchases</a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li *ngIf="isLoggedIn" routerLinkActive="active current">
         <a (click)="loginService.logout()" routerLink="/logout">
-          Hello: {{userInfo['full_name']}} <i class="fa-solid fa-person-through-window"></i>
+          Hello: {{userInfo.fullname}} <i class="fa-solid fa-person-through-window"></i>
           Logout
         </a>
       </li>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CartService} from "../services/cart.service";
+import {Ticket} from "../beans/Ticket";
 
 @Component({
   selector: 'app-order-summary',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderSummaryComponent implements OnInit {
 
-  constructor() { }
+  myTickets: Ticket[] = [];
+
+  constructor(private cartService: CartService) {
+  }
 
   ngOnInit(): void {
+    this.cartService.getSummary().subscribe({
+      next: response => {
+        this.myTickets = response;
+      },
+      error: (error: Error) => {
+        console.log(error.message);
+      }
+    })
   }
 
 }

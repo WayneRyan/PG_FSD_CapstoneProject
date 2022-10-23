@@ -1,1 +1,17 @@
-<p>order-summary works!</p>
+<h3>We appreciate your business:</h3> You may pick up the following tickets at the theatre prior to the show.
+<ul class="list-group" style="margin-top: 10px;">
+  <li *ngFor="let ticket of myTickets" class="list-group-item" style="background: lightcyan;">
+    <div>
+      <label style="margin-right: 10px; float: left;">Movie Name: </label>
+      <h4>{{ticket.movieName}}</h4>
+    </div>
+    <div>
+      <label style="margin-right: 10px; float: left;">StartTime: </label>
+      <h4>{{ticket.starttime | date:'short'}}</h4>
+    </div>
+    <div>
+      <label style="margin-right: 10px; float: left;">Quantity: </label>
+      <h4>{{ticket.quantity}}</h4>
+    </div>
+  </li>
+</ul>

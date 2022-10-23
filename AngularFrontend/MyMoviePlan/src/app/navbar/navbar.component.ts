@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticateService} from "../services/authenticate.service";
+import {Account} from "../beans/Account";
 
 @Component({
   selector: 'navbar',
@@ -9,7 +10,7 @@ import {AuthenticateService} from "../services/authenticate.service";
 export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean = false;
-  userInfo: any = '';
+  userInfo: Account = new Account();
 
   constructor(public loginService: AuthenticateService) {
   }

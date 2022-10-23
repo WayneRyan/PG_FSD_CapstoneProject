@@ -3,11 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 import {MovieShowTimes} from "../beans/MovieShowTimes";
 import {ShowTime} from "../beans/ShowTime";
+import {Account} from "../beans/Account";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShowTimeService {
+
+  userInfo: Account = new Account();
   private movieShowTimes = new BehaviorSubject<MovieShowTimes>({
     allMovies: [],
     showTimesByMovieID: new Map<number, ShowTime[]>()
@@ -30,5 +33,4 @@ export class ShowTimeService {
       error: (error: Error) => console.log(error.message)
     });
   }
-
 }

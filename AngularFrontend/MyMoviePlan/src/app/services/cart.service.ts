@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Account} from "../beans/Account";
 import {AuthenticateService} from "./authenticate.service";
+import {Ticket} from "../beans/Ticket";
 
 @Injectable({
   providedIn: 'root'
@@ -67,4 +68,9 @@ export class CartService {
     }
     return this.httpClient.post('http://localhost:8181/purchase/create', myTickets, {responseType: 'text'});
   }
+
+  getSummary(){
+    return this.httpClient.get<Ticket[]>('http://localhost:8181/purchase/get-by-user/' + this.userInfo.id);
+  }
+
 }
