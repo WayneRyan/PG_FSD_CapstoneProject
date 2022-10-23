@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import {FormsModule} from "@angular/forms";
 import {CartService} from "./services/cart.service";
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     LogoutComponent,
     CartComponent,
     FooterComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
       {path: 'cart', component: CartComponent},
       {path: 'checkout', component: CheckoutComponent},
       {path: 'summary', component: OrderSummaryComponent},
+      {path: 'admin', component: AdminComponent},
       {path: '**', component: NotFoundComponent}
     ])
   ],

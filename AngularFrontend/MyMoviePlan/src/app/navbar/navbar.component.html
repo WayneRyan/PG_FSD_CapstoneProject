@@ -15,6 +15,9 @@
       <li *ngIf="isLoggedIn" routerLinkActive="active current">
         <a routerLink="/summary"><i class="fa-solid fa-ticket"></i> Purchases</a>
       </li>
+      <li *ngIf="isLoggedIn && userInfo.isadmin" routerLinkActive="active current">
+        <a routerLink="/admin"><i class="fa-sharp fa-solid fa-screwdriver-wrench"></i> Admin</a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li *ngIf="isLoggedIn" routerLinkActive="active current">
