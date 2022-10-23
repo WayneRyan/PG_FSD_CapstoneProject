@@ -12,9 +12,10 @@ import { SearchComponent } from './search/search.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CartComponent } from './cart/cart.component';
-import { ItemDetailsComponent } from './item-details/item-details.component';
 import { FooterComponent } from './footer/footer.component';
 import {FormsModule} from "@angular/forms";
+import {CartService} from "./services/cart.service";
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,8 @@ import {FormsModule} from "@angular/forms";
     CheckoutComponent,
     LogoutComponent,
     CartComponent,
-    ItemDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +42,11 @@ import {FormsModule} from "@angular/forms";
       {path: 'search', component: SearchComponent},
       {path: 'cart', component: CartComponent},
       {path: 'checkout', component: CheckoutComponent},
+      {path: 'summary', component: OrderSummaryComponent},
       {path: '**', component: NotFoundComponent}
     ])
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

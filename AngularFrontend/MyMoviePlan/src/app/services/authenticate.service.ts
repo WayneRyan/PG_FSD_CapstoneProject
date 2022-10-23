@@ -25,13 +25,11 @@ export class AuthenticateService {
   }
 
   authenticate(userName: string, password: string) {
-    // Need to authenticate with server.
     this.httpClient.post<Account>('http://localhost:8181/account/login', {
       username: userName,
       password: password
     }).subscribe({
       next: response => {
-        console.log(response)
         if (response['id'] > 0) {
           this.isLoggedIn.next(true);
           this.errorMessage.next('');
@@ -47,15 +45,5 @@ export class AuthenticateService {
         this.userInfo.next(new Account());
       }
     });
-
-    // this.httpClient.get<any>('http://localhost:8181/account/get-all').subscribe({
-    //   next: response => {
-    //     console.log(response);
-    //   },
-    //   error: (error: Error) => {
-    //     console.log(error.message);
-    //   }
-    // });
-    //
   }
 }

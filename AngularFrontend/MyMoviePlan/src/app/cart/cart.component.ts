@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   myCart = new Map<string,{movieID:number,showTimeID:number, quantity:number}>();
   myShowTimes = new MovieShowTimes();
 
-  constructor(public cartService:CartService, private showTimeService:ShowTimeService) {}
+  constructor(private cartService:CartService, private showTimeService:ShowTimeService) {}
 
   ngOnInit(): void {
     this.cartService.currentCart.subscribe(myCart => this.myCart = myCart);
@@ -53,5 +53,14 @@ export class CartComponent implements OnInit {
       retVal += this.getSubTotal(key);
     }
     return retVal;
+  }
+
+
+  plusOne(key:string) {
+    this.cartService.plusOne(key);
+  }
+
+  minusOne(key:string) {
+    this.cartService.minusOne(key);
   }
 }

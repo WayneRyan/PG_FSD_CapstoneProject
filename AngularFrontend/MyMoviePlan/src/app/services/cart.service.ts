@@ -1,35 +1,36 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {ShowTime} from "../beans/ShowTime";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Account} from "../beans/Account";
-import {MoviesService} from "./movies.service";
-import {ShowTimeService} from "./show-time.service";
 import {AuthenticateService} from "./authenticate.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService implements OnInit{
+export class CartService {
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   private myCart = new BehaviorSubject<Map<string, { movieID: number, showTimeID: number, quantity: number }>>(new Map());
   currentCart = this.myCart.asObservable();
-  userInfo:Account = new Account();
+  userInfo: Account = new Account();
 
-  constructor(private httpClient: HttpClient, public loginService:AuthenticateService) {
+  constructor(private httpClient: HttpClient, public loginService: AuthenticateService) {
+    this.loginService.currentUserInfo.subscribe(
+      (userInfo) => {
+        this.userInfo = userInfo;
+      });
   }
-
-  ngOnInit(): void {
-    this.loginService.currentUserInfo.subscribe(userInfo => this.userInfo = userInfo);
-    }
-
 
   add(movieID: number, showtimeID: number) {
     let key = this.makeKey(movieID, showtimeID);
     let ticket = this.myCart.value.get(key) ?? {movieID: movieID, showTimeID: showtimeID, quantity: 0};
     ticket.quantity++;
     this.myCart.value.set(key, ticket);
-    console.log(this.myCart.value);
   }
 
   private makeKey(movieID: number, showtimeID: number): string {
@@ -58,18 +59,12 @@ export class CartService implements OnInit{
     }
   }
 
-  completePurchase(): boolean {
-    // let myTickets: { showtime: ShowTime, account: Account, quantity: number }[];
-    // for (let key of this.myCart.value.keys()) {
-    //   let ticket = this.myCart.value.get(key);
-    //   myTickets.push(this.showTimeService.getTicket(ticket.showTimeID))
-    // }
-    // this.httpClient.post<string>('http://localhost:8181/purchase/create', myTickets).subscribe({
-    //   next: response => {
-    //     return true;
-    //   },
-    //   error: (error: Error) => console.log(error.message)
-    // });
-    return false;
+  completePurchase() {
+    let myTickets: { showtime: { id: number }, account: { id: number }, quantity: number }[] = [];
+    for (let key of this.myCart.value.keys()) {
+      let ticket = this.myCart.value.get(key) ?? {movieID: 0, showTimeID: 0, quantity: 0};
+      myTickets.push({showtime: {id: ticket.showTimeID}, account: {id: this.userInfo.id}, quantity: ticket.quantity})
+    }
+    return this.httpClient.post('http://localhost:8181/purchase/create', myTickets, {responseType: 'text'});
   }
 }

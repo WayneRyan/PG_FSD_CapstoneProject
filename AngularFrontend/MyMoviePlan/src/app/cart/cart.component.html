@@ -4,11 +4,11 @@
 <ul class="list-group" style="margin-top: 10px;">
   <li *ngFor="let key of myCart.keys()" class="list-group-item" style="background: lightcyan;">
     <div>
-      <button class="btn btn-xs" (click)="cartService.plusOne(key)">
+      <button class="btn btn-xs" (click)="plusOne(key)">
         <i class="fa-sharp fa-solid fa-plus"></i>
       </button>
       <span class="badge">Qty: {{ getQuantity(key)}}</span>
-      <button class="btn btn-xs" (click)="cartService.minusOne(key)">
+      <button class="btn btn-xs" (click)="minusOne(key)">
         <i class="fa-sharp fa-solid fa-minus"></i>
       </button>
     </div>
