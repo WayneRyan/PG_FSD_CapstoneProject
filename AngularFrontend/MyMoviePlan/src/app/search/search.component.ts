@@ -26,4 +26,25 @@ export class SearchComponent implements OnInit {
   addToCart(movieID: number, showTime: string) {
     this.cartService.add(movieID, Number(showTime));
   }
+
+  clearSearch(){
+    this.showTimeService.getAll();
+  }
+
+  filterMovies(searchTerm:string){
+    console.log(searchTerm);
+    if (searchTerm.length > 0){
+      let regex = new RegExp(searchTerm, 'i');
+      this.movieShowTimes.allMovies = this.movieShowTimes.allMovies.filter((movie) => {
+        let retVal:boolean = movie.name.search(regex) !== -1 ||
+          movie.genre.search(regex) !== -1 ||
+          movie.description.search(regex) !== -1 ||
+          movie.language.search(regex) !== -1 ||
+          movie.rating.search(regex) !== -1 ;
+        return retVal;
+      });
+    } else {
+      this.showTimeService.getAll();
+    }
+  }
 }

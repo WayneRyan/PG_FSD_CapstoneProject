@@ -1,10 +1,20 @@
 <form>
-  <input type="text" placeholder="Search..." style="margin-bottom: 10px;"> <i class="fa-solid fa-magnifying-glass" style="position: relative; left: -25px;"></i>
+  <input (keyup.enter)="filterMovies(searchField.value)"
+         #searchField
+         type="text"
+         placeholder="Search..."
+         style="margin-bottom: 10px;">
+  <i class="fa-solid fa-magnifying-glass" style="position: relative; left: -25px;"></i>
+  <a type="button" class="btn btn-success" (click)="clearSearch()">Clear Search</a>
 </form>
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
   <ol class="carousel-indicators">
-    <li *ngFor="let movie of movieShowTimes.allMovies" data-target="#myCarousel" [attr.data-slide-to]="movie['id'] - 1"
-        [class]="movie['id'] === 1 ? 'active' : ''"></li>
+    <li *ngFor="let movie of movieShowTimes.allMovies"
+        data-target="#myCarousel"
+        [attr.data-slide-to]="movie['id'] - 1"
+        [class]="movie['id'] === 1 ? 'active' : ''">
+
+    </li>
   </ol>
   <div class="carousel-inner">
     <div *ngFor="let movie of movieShowTimes.allMovies" [class]="movie['id'] === 1 ? 'item active' : 'item'">
@@ -32,11 +42,16 @@
           <label>Select: </label>
           <div class="container-fluid" style="margin: 0px 60px 60px 0px">
             <select id="showTime" class="btn btn-primary" #showTime>
-              <option *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)" class="btn-default text-left" [value]="showTime.id">
+              <option *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)"
+                      class="btn-default text-left" [value]="showTime.id">
                 Showtime:<b>{{showTime.starttime |  date:'short'}}</b> | Price:<b>{{showTime.price | currency}}</b>
               </option>
             </select>
-            <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-success btn-sm" (click)="addToCart(movie['id'], showTime.value)">
+            <button data-toggle="modal"
+                    data-target="#exampleModal"
+                    type="button"
+                    class="btn btn-success btn-sm"
+                    (click)="addToCart(movie['id'], showTime.value)">
               <i class="fa-solid fa-cart-plus"></i>
               <b> Add to Cart </b>
             </button>
@@ -54,13 +69,21 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-<div class="modal fade text-light bg-dark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-light bg-dark" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="background: lightcyan;">
       <div class="modal-footer" style="border: none;">
-        <a type="button" class="btn btn-success pull-left" data-dismiss="modal" routerLink="/cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
-          <h4 class="pull-left text-center" style="width:-webkit-fill-available;">The movie has been added to your cart.</h4>
-        <a type="button" class="btn btn-success pull-right" data-dismiss="modal"><i class="fa-sharp fa-solid fa-store"></i> Shop</a>
+        <a type="button" class="btn btn-success pull-left" data-dismiss="modal" routerLink="/cart">
+          <i class="fa-solid fa-cart-shopping"></i> Cart
+        </a>
+        <h4 class="pull-left text-center" style="width:-webkit-fill-available;">
+          The movie has been added to your cart.
+        </h4>
+        <a type="button" class="btn btn-success pull-right" data-dismiss="modal">
+          <i class="fa-sharp fa-solid fa-store"></i>
+          Shop
+        </a>
       </div>
     </div>
   </div>
