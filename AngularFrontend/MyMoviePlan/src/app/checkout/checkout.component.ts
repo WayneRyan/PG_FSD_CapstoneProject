@@ -21,22 +21,21 @@ export class CheckoutComponent implements OnInit {
     this.showTimeService.currentMovieShowTimes.subscribe(myShowTimes => this.myShowTimes = myShowTimes);
   }
 
-  private getShowTime(key:string): ShowTime | undefined {
-    let showTimeId = this.myCart?.get(key)?.showTimeID ?? 0;
-    let movieId = this.myCart?.get(key)?.movieID ?? 0;
-    // @ts-ignore
-    for (let showTime of this.myShowTimes.showTimesByMovieID.get(movieId)){
+  private getShowTime(key:string): ShowTime {
+    let showTimeId = this.myCart.get(key)?.showTimeID ?? 0;
+    let movieId = this.myCart.get(key)?.movieID ?? 0;
+    for (let showTime of this.myShowTimes.showTimesByMovieID.get(movieId) ?? []){
       if (showTime.id === showTimeId) return showTime;
     }
-    return undefined;
+    return new ShowTime();
   }
 
   private getQuantity(key:string): number {
-    return this.myCart?.get(key)?.quantity ?? 0;
+    return this.myCart.get(key)?.quantity ?? 0;
   }
 
   private getSubTotal(key:string): number {
-    return ((this.getQuantity(key) ?? 0) * (this.getShowTime(key)?.price ?? 0));
+    return this.getQuantity(key) * this.getShowTime(key).price;
   }
 
   getTotalPrice(): number {

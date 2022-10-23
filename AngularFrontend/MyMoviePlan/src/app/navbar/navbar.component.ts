@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticateService} from "../services/authenticate.service";
 
 @Component({
@@ -8,10 +8,11 @@ import {AuthenticateService} from "../services/authenticate.service";
 })
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn:boolean = false;
-  userInfo:any = '';
+  isLoggedIn: boolean = false;
+  userInfo: any = '';
 
-  constructor(public loginService:AuthenticateService) { }
+  constructor(public loginService: AuthenticateService) {
+  }
 
   ngOnInit(): void {
     this.loginService.isCurrentlyLoggedIn.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);

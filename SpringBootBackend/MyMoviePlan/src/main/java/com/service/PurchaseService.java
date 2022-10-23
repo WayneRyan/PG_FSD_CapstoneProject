@@ -14,7 +14,7 @@ public class PurchaseService {
     @Autowired
     PurchaseRepository purchaseRepository;
 
-    public String createPurchase(List<Purchase> purchases){
+    public String createPurchase(List<Purchase> purchases) {
         for (Purchase p : purchases) {
             purchaseRepository.save(p);
         }

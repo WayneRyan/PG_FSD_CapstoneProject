@@ -13,7 +13,8 @@ export class SearchComponent implements OnInit {
 
   movieShowTimes: MovieShowTimes = {allMovies: [], showTimesByMovieID: new Map<number, ShowTime[]>()};
 
-  constructor(private showTimeService: ShowTimeService, private cartService: CartService) {}
+  constructor(private showTimeService: ShowTimeService, private cartService: CartService) {
+  }
 
   ngOnInit(): void {
     this.showTimeService.currentMovieShowTimes.subscribe((movieShowTimes: MovieShowTimes) => {
@@ -25,7 +26,7 @@ export class SearchComponent implements OnInit {
     this.showTimeService.getAll();
   }
 
-  addToCart(movieID:number, showTime: string) {
+  addToCart(movieID: number, showTime: string) {
     this.cartService.add(movieID, Number(showTime));
   }
 }

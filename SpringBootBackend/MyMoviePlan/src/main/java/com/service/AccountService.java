@@ -16,11 +16,10 @@ public class AccountService {
     AccountRepository accountRepository;
 
     public String createAccount(Account account) {
-        // Need to test issues with account already exists.
         try {
             accountRepository.save(account);
             return "Account created successfully";
-        }catch (Exception e) {
+        } catch (Exception e) {
             return "There was an issue creating the account";
         }
     }
@@ -30,12 +29,11 @@ public class AccountService {
     }
 
     public boolean checkCredentials(Account account) {
+        System.out.println("Same account:" + account);
         return accountRepository.existsByPasswordAndUsername(account.getPassword(), account.getUsername());
     }
 
-    public Account getByUsername(String username){
-        return accountRepository.findAccountByUsername(username);
+    public Account getByUsername(String username) {
+        return Account.safeCopy(accountRepository.findAccountByUsername(username));
     }
-
-    // Need to check user name and password
 }

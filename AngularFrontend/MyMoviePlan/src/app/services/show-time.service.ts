@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 import {MovieShowTimes} from "../beans/MovieShowTimes";
 import {ShowTime} from "../beans/ShowTime";
-import {Account} from "../beans/Account";
 
 @Injectable({
   providedIn: 'root'
@@ -30,17 +29,6 @@ export class ShowTimeService {
       },
       error: (error: Error) => console.log(error.message)
     });
-  }
-
-  getTicket(ticket:{showTimeID: number, quantity: number }):{ showtime: ShowTime, account: Account, quantity: number }{
-    this.movieShowTimes.value.
-    let showTimeId = this.myCart?.get(key)?.showTimeID ?? 0;
-    let movieId = this.myCart?.get(key)?.movieID ?? 0;
-    // @ts-ignore
-    for (let showTime of this.myShowTimes.showTimesByMovieID.get(movieId)){
-      if (showTime.id === showTimeId) return showTime;
-    }
-    return undefined;
   }
 
 }

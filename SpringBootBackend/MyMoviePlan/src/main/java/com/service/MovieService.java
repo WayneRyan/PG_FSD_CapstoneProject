@@ -14,7 +14,7 @@ public class MovieService {
     @Autowired
     MovieRepository movieRepository;
 
-    public String createMovie(Movie movie){
+    public String createMovie(Movie movie) {
         movieRepository.save(movie);
         return "Movie created successfully";
     }

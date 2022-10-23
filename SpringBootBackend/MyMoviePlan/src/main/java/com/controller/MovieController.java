@@ -16,8 +16,12 @@ public class MovieController {
     MovieService movieService;
 
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String createMovie(@RequestBody Movie movie) {return movieService.createMovie(movie);}
+    public String createMovie(@RequestBody Movie movie) {
+        return movieService.createMovie(movie);
+    }
 
     @GetMapping(value = "get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Movie> getAllMovies() {return movieService.getAllMovies();}
+    public List<Movie> getAllMovies() {
+        return movieService.getAllMovies();
+    }
 }

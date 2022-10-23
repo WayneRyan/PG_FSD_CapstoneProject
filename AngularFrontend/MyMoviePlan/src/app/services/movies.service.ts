@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 
@@ -10,9 +10,10 @@ export class MoviesService {
   private movies = new BehaviorSubject(new Array<any>());
   currentMovies = this.movies.asObservable();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  getAll(){
+  getAll() {
     this.httpClient.get<any[]>('http://localhost:8181/movie/get-all').subscribe({
       next: response => {
         this.movies.next(response);

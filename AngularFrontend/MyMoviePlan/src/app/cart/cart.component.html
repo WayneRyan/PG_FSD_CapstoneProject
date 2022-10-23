@@ -14,15 +14,15 @@
     </div>
     <div>
       <label style="margin-right: 10px; float: left;">Movie: </label>
-      <h4>{{ getMovie(key)?.name}}</h4>
+      <h4>{{ getMovie(key).name}}</h4>
     </div>
     <div>
       <label style="margin-right: 10px; float: left;">Showtime: </label>
-      <h4>{{getShowTime(key)?.starttime ?? 0 | date:'short'}}</h4>
+      <h4>{{getShowTime(key).starttime | date:'short'}}</h4>
     </div>
     <div>
       <label style="margin-right: 10px; float: left;">Ticket Price: </label>
-      <h4>{{getQuantity(key)}} x {{getShowTime(key)?.price ?? 0 | currency}}
+      <h4>{{getQuantity(key)}} x {{getShowTime(key).price | currency}}
         = {{getSubTotal(key) | currency}}</h4>
     </div>
   </li>

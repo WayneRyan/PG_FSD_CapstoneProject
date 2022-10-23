@@ -18,7 +18,7 @@ public class ShowTimeService {
     @Autowired
     ShowTimeRepository showTimeRepository;
 
-    public String createShowTime(Showtime showTime){
+    public String createShowTime(Showtime showTime) {
         showTimeRepository.save(showTime);
         return "ShowTime created successfully";
     }
@@ -29,8 +29,8 @@ public class ShowTimeService {
         List<Movie> allMovies = retVal.getAllMovies();
         for (Showtime showtime : showTimeRepository.findAll()) {
             Integer movie_id = showtime.getMovie().getId();
-            if (! showTimesByMovieID.containsKey(movie_id)){
-                showTimesByMovieID.put(movie_id,new ArrayList<Showtime>());
+            if (!showTimesByMovieID.containsKey(movie_id)) {
+                showTimesByMovieID.put(movie_id, new ArrayList<Showtime>());
                 allMovies.add(showtime.getMovie());
             }
             showTimesByMovieID.get(movie_id).add(showtime);
