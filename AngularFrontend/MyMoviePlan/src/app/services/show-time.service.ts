@@ -33,4 +33,14 @@ export class ShowTimeService {
       error: (error: Error) => console.log(error.message)
     });
   }
+
+  update(showTime: ShowTime) {
+    return this.httpClient.put('http://localhost:8181/show-time/update', showTime, {responseType: 'text'});
+  }
+
+  create(showTime: ShowTime) {
+    return this.httpClient.post('http://localhost:8181/show-time/create', showTime, {responseType: 'text'});
+  }
+
+
 }

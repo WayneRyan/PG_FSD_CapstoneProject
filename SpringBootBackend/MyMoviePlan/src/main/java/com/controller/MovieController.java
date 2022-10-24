@@ -24,4 +24,9 @@ public class MovieController {
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
+
+    @PutMapping(value = "update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String updateMovie(@RequestBody Movie movie) {
+        return movieService.updateMovie(movie);
+    }
 }

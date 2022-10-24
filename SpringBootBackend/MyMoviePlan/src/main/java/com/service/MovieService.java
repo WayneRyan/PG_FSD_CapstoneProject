@@ -22,4 +22,9 @@ public class MovieService {
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
+
+    public String updateMovie(Movie movie) {
+        movieRepository.save(movie);
+        return "Movie updated successfully";
+    }
 }

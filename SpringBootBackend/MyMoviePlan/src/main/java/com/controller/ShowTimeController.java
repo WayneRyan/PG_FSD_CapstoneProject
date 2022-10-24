@@ -23,4 +23,14 @@ public class ShowTimeController {
     public MovieShowTimes getAllShowTimes() {
         return showTimeService.getAllShowTimes();
     }
+
+    @PutMapping(value = "update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String updateShowTime(@RequestBody Showtime showtime) {
+        return showTimeService.updateShowTime(showtime);
+    }
+
+    @DeleteMapping(value = "delete/{id}")
+    public String deleteShowTime(@PathVariable("id") int id) {
+        return showTimeService.deleteShowTime(id);
+    }
 }

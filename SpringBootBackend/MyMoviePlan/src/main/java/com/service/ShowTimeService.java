@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,8 +34,18 @@ public class ShowTimeService {
                 showTimesByMovieID.put(movie_id, new ArrayList<Showtime>());
                 allMovies.add(showtime.getMovie());
             }
-            showTimesByMovieID.get(movie_id).add(showtime);
+            showTimesByMovieID.get(movie_id).add(Showtime.safeCopy(showtime));
         }
         return retVal;
+    }
+
+    public String updateShowTime(Showtime showtime) {
+        showTimeRepository.save(showtime);
+        return "ShowTime updated successfully";
+    }
+
+    public String deleteShowTime(int id) {
+        showTimeRepository.deleteById(id);
+        return "ShowTime deleted successfully";
     }
 }

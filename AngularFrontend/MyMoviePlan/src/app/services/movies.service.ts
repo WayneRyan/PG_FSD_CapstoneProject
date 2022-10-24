@@ -22,6 +22,10 @@ export class MoviesService {
       error: (error: Error) => {
         console.log(error.message);
       }
-    })
+    });
+  }
+
+  update(movie:Movie){
+    return this.httpClient.put('http://localhost:8181/movie/update', movie, {responseType: 'text'});
   }
 }

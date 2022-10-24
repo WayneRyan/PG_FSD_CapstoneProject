@@ -14,7 +14,6 @@ public class Showtime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JsonIgnore
     private Movie movie;
     private Date starttime;
     private double price;
@@ -24,4 +23,17 @@ public class Showtime {
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Purchase> purchases;
+
+    public static Showtime safeCopy(Showtime original){
+        Showtime retVal = new Showtime();
+        retVal.id = original.id;;
+        retVal.movie = null;
+        retVal.starttime = original.starttime;
+        retVal.price = original.price;
+        retVal.theatre = original.theatre;
+        retVal.available = original.available;
+        retVal.enabled = original.enabled;
+        retVal.purchases = null;
+        return retVal;
+    }
 }

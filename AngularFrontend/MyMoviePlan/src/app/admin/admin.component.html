@@ -1,1 +1,86 @@
-<p>admin works!</p>
+<ul class="list-group" style="margin-top: 10px;">
+  <li *ngFor="let movie of movieShowTimes.allMovies" class="list-group-item" style="background: lightcyan;">
+    <form #f="ngForm" (ngSubmit)="updateMovie(f)">
+      <input type="number" hidden [ngModel]="movie.id" name="id">
+      <input type="text" hidden [ngModel]="movie.image" name="image">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" class="form-control" [ngModel]="movie.name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="language">Language</label>
+        <input id="language" type="text" class="form-control" [ngModel]="movie.language" name="language">
+      </div>
+      <div class="form-group">
+        <label for="genre">Genre</label>
+        <input id="genre" type="text" class="form-control" [ngModel]="movie.genre" name="genre">
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration</label>
+        <input id="duration" type="number" class="form-control" [ngModel]="movie.duration" name="duration">
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <input id="rating" type="text" class="form-control" [ngModel]="movie.rating" name="rating">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" rows="5" class="form-control" [ngModel]="movie.description"
+                  name="description"></textarea>
+      </div>
+      <button class="btn btn-primary">Update Movie</button>
+    </form>
+    <form style="margin-top: 10px;" #editForm="ngForm" (ngSubmit)="updateShowtime(editForm)">
+      <button class="btn btn-primary">Edit Showtime</button>
+      <input hidden [ngModel]="movie.id" name="movieID">
+      <select id="showTime" class="btn btn-primary" #showTime ngModel name="showTimeID">
+        <option *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)"
+                class="btn-default text-left" [value]="showTime.id">
+          Showtime:<b>{{showTime.starttime |  date:'short'}}</b> | Price:<b>{{showTime.price | currency}}</b>
+        </option>
+      </select>
+    </form>
+    <button type="button" class="btn btn-default" (click)="createNewShowtime(movie)">Add New Showtime</button>
+  </li>
+</ul>
+
+<div class="modal fade" id="showtimeEdit" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{modalPurpose}} Showtime.</h4> {{modalMessage}}
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="completeUpdate(f)">
+          <input hidden type="number" [(ngModel)]="showTimeToEdit.id" name="id">
+          <div class="form-group">
+            <label for="description">Start Time: </label>
+            <input type="datetime-local" [ngModel]="showTimeToEdit.starttime | date:'yyyy-MM-ddTHH:mm'"
+                   name="starttime">
+          </div>
+          <div class="form-group">
+            <label for="description">Price: </label>
+            <input type="number" [(ngModel)]="showTimeToEdit.price" name="price">
+          </div>
+          <div class="form-group">
+            <label for="description">Theatre: </label>
+            <input type="number" [(ngModel)]="showTimeToEdit.theatre" name="theatre">
+          </div>
+          <div class="form-group">
+            <label for="description">Tickets Available: </label>
+            <input type="number" [(ngModel)]="showTimeToEdit.available" name="available">
+          </div>
+          <div class="form-group">
+            <label for="description">Enabled: </label>
+            <input type="checkbox" [(ngModel)]="showTimeToEdit.enabled" name="enabled">
+          </div>
+          <button class="btn btn-primary">{{modalPurpose}}</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
