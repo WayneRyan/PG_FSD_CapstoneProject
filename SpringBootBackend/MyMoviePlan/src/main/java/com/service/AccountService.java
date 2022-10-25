@@ -16,11 +16,11 @@ public class AccountService {
     AccountRepository accountRepository;
 
     public String createAccount(Account account) {
-        try {
+        if (!accountRepository.existsByUsername(account.getUsername())){
             accountRepository.save(account);
             return "Account created successfully";
-        } catch (Exception e) {
-            return "There was an issue creating the account";
+        } else {
+            return "Try a different user name";
         }
     }
 

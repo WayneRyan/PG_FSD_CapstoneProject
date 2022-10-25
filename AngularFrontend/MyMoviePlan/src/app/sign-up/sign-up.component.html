@@ -1,0 +1,11 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <form (ngSubmit)="submit(f)" #f="ngForm">
+      <div *ngIf="errorMessage !== ''">{{errorMessage}}</div>
+      <input type="text" id="fullname" class="fadeIn second" [(ngModel)]="account.fullname" name="fullname" placeholder="Full Name">
+      <input type="text" id="username" class="fadeIn second" [(ngModel)]="account.username" name="username" placeholder="username">
+      <input type="text" id="password" class="fadeIn third" ngModel name="password" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Create Account">
+    </form>
+  </div>
+</div>

@@ -44,7 +44,7 @@
             <select id="showTime" class="btn btn-primary" #showTime>
               <option *ngFor="let showTime of movieShowTimes.showTimesByMovieID.get(movie.id)"
                       class="btn-default text-left" [value]="showTime.id" [hidden]="!showTime.enabled">
-                Showtime:<b>{{showTime.starttime |  date:'short'}}</b> | Price:<b>{{showTime.price | currency}}</b>
+                Showtime:{{showTime.starttime |  date:'short'}} | Price:{{showTime.price | currency}}
               </option>
               <option>Select...</option>
             </select>

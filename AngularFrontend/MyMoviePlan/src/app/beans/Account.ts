@@ -1,6 +1,7 @@
 export class Account {
-  public id: number = 0;
-  public fullname: string = '';
-  public username: string = '';
-  public isadmin: boolean = false;
+  public id?: number;
+  public fullname = '';
+  public username = '';
+  public isadmin?:boolean;
+  public password?: string;
 }

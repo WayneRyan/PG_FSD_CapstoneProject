@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 import {CartService} from "./services/cart.service";
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { AdminComponent } from './admin/admin.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AdminComponent } from './admin/admin.component';
     CartComponent,
     FooterComponent,
     OrderSummaryComponent,
-    AdminComponent
+    AdminComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { AdminComponent } from './admin/admin.component';
       {path: 'checkout', component: CheckoutComponent},
       {path: 'summary', component: OrderSummaryComponent},
       {path: 'admin', component: AdminComponent},
+      {path: 'signup', component: SignUpComponent},
       {path: '**', component: NotFoundComponent}
     ])
   ],

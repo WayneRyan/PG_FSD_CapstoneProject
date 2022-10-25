@@ -64,7 +64,7 @@ export class CartService {
     let myTickets: { showtime: { id: number }, account: { id: number }, quantity: number }[] = [];
     for (let key of this.myCart.value.keys()) {
       let ticket = this.myCart.value.get(key) ?? {movieID: 0, showTimeID: 0, quantity: 0};
-      myTickets.push({showtime: {id: ticket.showTimeID}, account: {id: this.userInfo.id}, quantity: ticket.quantity})
+      myTickets.push({showtime: {id: ticket.showTimeID}, account: {id: this.userInfo.id ?? 0}, quantity: ticket.quantity})
     }
     return this.httpClient.post('http://localhost:8181/purchase/create', myTickets, {responseType: 'text'});
   }
