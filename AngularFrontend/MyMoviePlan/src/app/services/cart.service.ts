@@ -66,11 +66,11 @@ export class CartService {
       let ticket = this.myCart.value.get(key) ?? {movieID: 0, showTimeID: 0, quantity: 0};
       myTickets.push({showtime: {id: ticket.showTimeID}, account: {id: this.userInfo.id ?? 0}, quantity: ticket.quantity})
     }
-    return this.httpClient.post('http://localhost:8181/purchase/create', myTickets, {responseType: 'text'});
+    return this.httpClient.post('http://localhost:8383/purchase/create', myTickets, {responseType: 'text'});
   }
 
   getSummary(){
-    return this.httpClient.get<Ticket[]>('http://localhost:8181/purchase/get-by-user/' + this.userInfo.id);
+    return this.httpClient.get<Ticket[]>('http://localhost:8383/purchase/get-by-user/' + this.userInfo.id);
   }
 
 }

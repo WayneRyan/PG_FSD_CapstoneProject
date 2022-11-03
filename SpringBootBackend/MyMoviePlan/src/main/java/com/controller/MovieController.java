@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("movie")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 public class MovieController {
     @Autowired
     MovieService movieService;

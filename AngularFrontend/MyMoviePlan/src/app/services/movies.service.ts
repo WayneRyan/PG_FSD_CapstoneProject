@@ -15,7 +15,7 @@ export class MoviesService {
   }
 
   getAll() {
-    this.httpClient.get<Movie[]>('http://localhost:8181/movie/get-all').subscribe({
+    this.httpClient.get<Movie[]>('http://localhost:8383/movie/get-all').subscribe({
       next: response => {
         this.movies.next(response);
       },
@@ -26,6 +26,6 @@ export class MoviesService {
   }
 
   update(movie:Movie){
-    return this.httpClient.put('http://localhost:8181/movie/update', movie, {responseType: 'text'});
+    return this.httpClient.put('http://localhost:8383/movie/update', movie, {responseType: 'text'});
   }
 }
