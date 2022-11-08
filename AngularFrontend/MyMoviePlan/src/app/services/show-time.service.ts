@@ -21,7 +21,9 @@ export class ShowTimeService {
   }
 
   getAll() {
-    this.httpClient.get<MovieShowTimes>('http://localhost:8383/show-time/get-all').subscribe({
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/show-time/get-all';
+    this.httpClient.get<MovieShowTimes>(myURL).subscribe({
       next: response => {
         let retval: MovieShowTimes = new MovieShowTimes();
         for (const [key, value] of Object.entries(response.showTimesByMovieID)) {
@@ -35,11 +37,15 @@ export class ShowTimeService {
   }
 
   update(showTime: ShowTime) {
-    return this.httpClient.put('http://localhost:8383/show-time/update', showTime, {responseType: 'text'});
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/show-time/update';
+    return this.httpClient.put(myURL, showTime, {responseType: 'text'});
   }
 
   create(showTime: ShowTime) {
-    return this.httpClient.post('http://localhost:8383/show-time/create', showTime, {responseType: 'text'});
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/show-time/create';
+    return this.httpClient.post(myURL, showTime, {responseType: 'text'});
   }
 
 

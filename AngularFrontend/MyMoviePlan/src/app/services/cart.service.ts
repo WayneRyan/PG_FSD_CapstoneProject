@@ -66,11 +66,15 @@ export class CartService {
       let ticket = this.myCart.value.get(key) ?? {movieID: 0, showTimeID: 0, quantity: 0};
       myTickets.push({showtime: {id: ticket.showTimeID}, account: {id: this.userInfo.id ?? 0}, quantity: ticket.quantity})
     }
-    return this.httpClient.post('http://localhost:8383/purchase/create', myTickets, {responseType: 'text'});
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/purchase/create';
+    return this.httpClient.post(myURL, myTickets, {responseType: 'text'});
   }
 
   getSummary(){
-    return this.httpClient.get<Ticket[]>('http://localhost:8383/purchase/get-by-user/' + this.userInfo.id);
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/purchase/get-by-user/';
+    return this.httpClient.get<Ticket[]>(myURL + this.userInfo.id);
   }
 
 }

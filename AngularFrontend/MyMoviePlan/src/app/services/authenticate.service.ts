@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Account} from "../beans/Account";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthenticateService {
   private errorMessage = new BehaviorSubject('');
   currentErrorMessage = this.errorMessage.asObservable();
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   logout() {
@@ -25,11 +26,15 @@ export class AuthenticateService {
   }
 
   create(account: Account){
-    return this.httpClient.post('http://localhost:8383/account/create', account, {responseType: 'text'});
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/account/create';
+    return this.httpClient.post(myURL, account, {responseType: 'text'});
   }
 
   authenticate(userName: string, password: string) {
-    this.httpClient.post<Account>('http://localhost:8383/account/login', {
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/account/login';
+    this.httpClient.post<Account>(myURL, {
       username: userName,
       password: password
     }).subscribe({

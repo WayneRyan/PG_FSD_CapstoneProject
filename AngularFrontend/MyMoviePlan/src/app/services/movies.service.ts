@@ -15,7 +15,9 @@ export class MoviesService {
   }
 
   getAll() {
-    this.httpClient.get<Movie[]>('http://localhost:8383/movie/get-all').subscribe({
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/movie/get-all';
+    this.httpClient.get<Movie[]>(myURL).subscribe({
       next: response => {
         this.movies.next(response);
       },
@@ -26,6 +28,8 @@ export class MoviesService {
   }
 
   update(movie:Movie){
-    return this.httpClient.put('http://localhost:8383/movie/update', movie, {responseType: 'text'});
+    let myURL =  window.location.href;
+    myURL = myURL.substring(0, myURL.lastIndexOf(':')) + ':8383/movie/update';
+    return this.httpClient.put(myURL, movie, {responseType: 'text'});
   }
 }
